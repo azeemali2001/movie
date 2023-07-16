@@ -36,3 +36,120 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.banner-card {
+  position: relative;
+  height: 70vh;
+  width: 100vw;
+
+  margin-top: 1vh;
+  margin-bottom: 3vh;
+
+  color: white;
+}
+
+.banner-img {
+  height: 25rem;
+  width: 100%;
+}
+
+.banner-title {
+  position: absolute;
+  top: 45vh;
+  left: 3vw;
+}
+
+.banner-text {
+  position: absolute;
+  top: 54vh;
+  left: 3vw;
+  height: 4.5rem;
+  overflow: hidden;
+  margin-right: 5vw;
+
+}
+
+.movie-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.movie-card {
+  width: 25vw;
+  height: 30vh;
+  margin: 0.5rem;
+  position: relative;
+  color: white;
+}
+
+.movie-img {
+  width: 25vw;
+  height: 30vh;
+}
+
+.movie-title {
+  position: absolute;
+  left: 0.4rem;
+}
+
+
+
+.movie-button {
+  position: absolute;
+  left: 5rem;
+  top: 8.7rem;
+}
+
+@media screen and (max-width : 400px){
+    .banner-card {
+      height: 35vh;
+    }
+
+    .banner-img {
+      height: 35vh;
+    }
+
+    .banner-title {
+      top: 1vh;
+      left: 5vw;
+    }
+
+    .banner-text{
+      top: 26vh;
+      left: 5vw;
+    }
+
+    .banner-text {
+      font-size: 0.6rem;
+      height: 2.5rem;
+    }
+
+    .movie-card {
+      height: 20vh;
+      width: 45vw;
+    }
+
+    .movie-img {
+      height: 20vh;
+      width: 45vw;
+    }
+
+    .movie-title {
+      font-size: 0.7rem;
+    }
+
+    .movie-button {
+      height: 4vh;
+      width: 35vw;
+      font-size: 0.6rem;
+      text-align: center;
+    }
+
+    .movie-button {
+      left: 0.4rem;
+      top: 5rem;
+    }
+}
