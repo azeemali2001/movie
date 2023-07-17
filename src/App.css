@@ -103,6 +103,10 @@
   top: 8.7rem;
 }
 
+.numberTag {
+  background-color: #282c34;
+}
+
 @media screen and (max-width : 400px){
     .banner-card {
       height: 35vh;
