@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { movies } from './getmovies'
 import axios from 'axios'
+
 
 export default class Movies extends Component {
     constructor() {
@@ -10,6 +10,7 @@ export default class Movies extends Component {
             parr : [1],
             currPage : 1,
             movies : [],
+            favorites : []   // add all the movie id which is stored in favorites
         }
     }
 
@@ -48,25 +49,52 @@ export default class Movies extends Component {
         
 
         this.setState({
-            parr : narr.length != 0 ? [...narr] : [...this.state.parr], 
+            parr : narr.length !== 0 ? [...narr] : [...this.state.parr], 
             currPage : this.state.currPage + 1
         },this.changeMovies)
     }
 
     handleLeft = () => {
-        if(this.state.currPage != 1) {
+        if(this.state.currPage !== 1) {
             this.setState({
                 currPage : this.state.currPage-1
             },this.changeMovies)
         }
     }
 
-    chengePage = (value) => {
-        if(value != this.state.currPage) {
+    changePage = (value) => {
+        if(value !== this.state.currPage) {
             this.setState({
                 currPage : value
             },this.changeMovies)
         }
+    }
+
+    handleFavorite = (movieObj) => {
+        let oldData = JSON.parse(localStorage.getItem('movie') || '[]');
+
+        if(this.state.favorites.includes(movieObj.id)) {
+            //Favorite me hai - remove kr do favorite se
+            oldData = oldData.filter((m)=>m.id !== movieObj.id);
+
+        } else {
+            //Favorite me nhi hai - add kr do
+            oldData.push(movieObj);
+        }
+
+        localStorage.setItem('movie', JSON.stringify(oldData));
+        console.log(oldData);
+        this.handleFavoriteState();
+
+
+    }
+
+    handleFavoriteState = ()=> {
+        let oldData = JSON.parse(localStorage.getItem('movie') || '[]');
+        let temp = oldData.map((movie)=>movie.id);
+        this.setState({
+            favorites:[...temp]
+        })
     }
 
     render() {
@@ -74,7 +102,7 @@ export default class Movies extends Component {
         return (
             <>
                 {
-                    this.state.movies.length == 0 ?
+                    this.state.movies.length === 0 ?
                         <div className="card" aria-hidden="true" style={{ 'width': '20rem' }}>
                             <img src="..." className="card-img-top" alt="..." />
                             <div className="card-body" >
@@ -105,7 +133,7 @@ export default class Movies extends Component {
                                             <div className='button-wrapper' style={{ display: 'flex', width: '100%', justifyContent: 'center' }}>
 
                                                 {
-                                                    this.state.hover == movieObj.id ? <a className="btn btn-primary movie-button">Add to Favorite</a> : ''
+                                                    this.state.hover == movieObj.id ? <a className="btn btn-primary movie-button" onClick={() => this.handleFavorite(movieObj)}>{this.state.favorites.includes(movieObj.id) ? "Remove From Favourite": "Add to Favourite"}</a> : ''
                                                 }
                                                 
 
@@ -120,8 +148,8 @@ export default class Movies extends Component {
                                 <li class="page-item"><a class="page-link" onClick={this.handleLeft}>Previous</a></li>
                                 {
                                     this.state.parr.map((value)=>(
-                                        value === this.state.currPage ? <li class="page-item"><a class="page-link numberTag" onClick={() => this.chengePage(value)} >{value}</a></li>: 
-                                        <li class="page-item"><a class="page-link" onClick={() => this.chengePage(value)} >{value}</a></li>
+                                        value === this.state.currPage ? <li class="page-item"><a class="page-link numberTag" onClick={() => this.changePage(value)} >{value}</a></li>: 
+                                        <li class="page-item"><a class="page-link" onClick={() => this.changePage(value)} >{value}</a></li>
                                     ))
                                 }
                                 <li class="page-item"><a class="page-link" onClick={this.handleRight}>Next</a></li>

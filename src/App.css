@@ -107,6 +107,13 @@
   background-color: #282c34;
 }
 
+.favorite-genre {
+  padding: 2rem;
+}
+
+.favorite-table {
+  padding: 2rem;
+}
 @media screen and (max-width : 400px){
     .banner-card {
       height: 35vh;

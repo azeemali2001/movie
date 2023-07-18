@@ -4,7 +4,7 @@ import { movies } from './getmovies'
 export default class Banner extends Component {
     render() {
         
-        let movie = movies.results[0];
+        let movie = movies.results[2];
         return (
             <>
                 {
